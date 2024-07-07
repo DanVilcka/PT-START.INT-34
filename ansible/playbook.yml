@@ -1,0 +1,36 @@
+---
+- name: Configure Debian 10 and PostgreSQL 16
+  hosts: localhost
+  become: true
+
+  tasks:
+  - name: Install required packages
+    apt:
+      name: postgresql-16,libpq-dev
+      state: present
+
+  - name: Configure PostgreSQL
+    template:
+      src: templates/pg_hba.conf.j2
+      dest: /etc/postgresql/16/main/pg_hba.conf
+      mode: '0640'
+    notify: restart postgresql
+
+  - name: Configure PostgreSQL config
+    template:
+      src: templates/postgresql.conf.j2
+      dest: /etc/postgresql/16/main/postgresql.conf
+      mode: '0640'
+    notify: restart postgresql
+
+  - name: Start and enable PostgreSQL
+    service:
+      name: postgresql
+      state: started
+      enabled: yes
+
+  handlers:
+  - name: restart postgresql
+    service:
+      name: postgresql
+      state: restarted

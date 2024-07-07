@@ -1,0 +1,20 @@
+# PostgreSQL configuration file
+# See https://www.postgresql.org/docs/16/runtime-config.html for more information
+
+# CONNECTIONS AND AUTHENTICATION
+listen_addresses = 'localhost'
+port = 5432
+
+# RESOURCE USAGE (except where noted, these are main defaults)
+shared_buffers = 128MB
+effective_cache_size = 512MB
+
+# QUERY TUNING
+log_statement = 'none'
+
+# ERROR REPORTING AND LOGGING
+log_destination = 'stderr'
+logging_collector = on
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
+log_truncate_on_rotation = on
+log_rotation_age = 1d
