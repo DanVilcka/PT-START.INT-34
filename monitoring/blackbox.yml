@@ -1,0 +1,31 @@
+modules:
+  http_2xx:
+    prober: http
+    timeout: 5s
+    http:
+      valid_status_codes: [200]
+      headers:
+        Accept: text/html
+      preferred_ip_protocol: ip4
+
+  http_response_time:
+    prober: http
+    timeout: 5s
+    http:
+      valid_status_codes: [200]
+      headers:
+        Accept: text/html
+      preferred_ip_protocol: ip4
+
+  dns_lookup_time:
+    prober: dns
+    timeout: 5s
+    dns:
+      query_type: A
+      preferred_ip_protocol: ip4
+
+  tcp_connect_time:
+    prober: tcp
+    timeout: 5s
+    tcp:
+      preferred_ip_protocol: ip4
